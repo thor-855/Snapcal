@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>SnapCal — Smart Calorie Tracker</title>
+    <meta name="description"
+        content="Track your daily calories effortlessly with SnapCal. Search foods, view nutrition info, and reach your health goals.">
+
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#0a0e17">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SnapCal">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+    <link rel="icon" type="image/png" href="/static/icons/icon-192.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo-group">
+                <span class="logo-icon">🔥</span>
+                <h1>Snap<span class="accent">Cal</span></h1>
+            </div>
+            <div class="header-date" id="headerDate"></div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="container">
+
+        <!-- ===== PROGRESS RING SECTION ===== -->
+        <section class="hero-section" id="heroSection">
+            <div class="progress-ring-wrapper">
+                <svg class="progress-ring" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00f5a0" />
+                            <stop offset="100%" style="stop-color:#00d9f5" />
+                        </linearGradient>
+                        <linearGradient id="ringBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:rgba(255,255,255,0.05)" />
+                            <stop offset="100%" style="stop-color:rgba(255,255,255,0.02)" />
+                        </linearGradient>
+                    </defs>
+                    <circle class="ring-bg" cx="100" cy="100" r="85" fill="none" stroke="url(#ringBg)"
+                        stroke-width="12" />
+                    <circle class="ring-progress" cx="100" cy="100" r="85" fill="none" stroke="url(#ringGradient)"
+                        stroke-width="12" stroke-linecap="round" stroke-dasharray="534" stroke-dashoffset="534"
+                        transform="rotate(-90 100 100)" />
+                </svg>
+                <div class="ring-content">
+                    <div class="ring-calories" id="ringCalories">0</div>
+                    <div class="ring-label">of <span id="ringGoal">2000</span> kcal</div>
+                </div>
+            </div>
+            <div class="goal-edit">
+                <button class="btn-ghost" id="editGoalBtn" title="Edit calorie goal">
+                    🎯 Set Goal
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== MACRO CARDS ===== -->
+        <section class="macro-cards" id="macroCards">
+            <div class="macro-card protein-card">
+                <div class="macro-icon">🥩</div>
+                <div class="macro-value" id="totalProtein">0g</div>
+                <div class="macro-label">Protein</div>
+                <div class="macro-bar">
+                    <div class="macro-bar-fill protein-fill" id="proteinBar"></div>
+                </div>
+            </div>
+            <div class="macro-card carbs-card">
+                <div class="macro-icon">🌾</div>
+                <div class="macro-value" id="totalCarbs">0g</div>
+                <div class="macro-label">Carbs</div>
+                <div class="macro-bar">
+                    <div class="macro-bar-fill carbs-fill" id="carbsBar"></div>
+                </div>
+            </div>
+            <div class="macro-card fat-card">
+                <div class="macro-icon">🥑</div>
+                <div class="macro-value" id="totalFat">0g</div>
+                <div class="macro-label">Fat</div>
+                <div class="macro-bar">
+                    <div class="macro-bar-fill fat-fill" id="fatBar"></div>
+                </div>
+            </div>
+            <div class="macro-card fiber-card">
+                <div class="macro-icon">🌿</div>
+                <div class="macro-value" id="totalFiber">0g</div>
+                <div class="macro-label">Fiber</div>
+                <div class="macro-bar">
+                    <div class="macro-bar-fill fiber-fill" id="fiberBar"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ADD FOOD SECTION ===== -->
+        <section class="add-food-section" id="addFoodSection">
+            <h2 class="section-title">
+                <span class="section-icon">➕</span> Add Food
+            </h2>
+            <div class="search-container">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="foodSearch" placeholder="Search food... (e.g., apple, rice, pizza)"
+                        autocomplete="off">
+                    <button class="clear-btn" id="clearSearch" title="Clear">✕</button>
+                </div>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+
+            <!-- Category Browser -->
+            <div class="category-browser" id="categoryBrowser">
+                <h3 class="subsection-title">Browse by Category</h3>
+                <div class="category-pills" id="categoryPills"></div>
+                <div class="category-foods" id="categoryFoods"></div>
+            </div>
+        </section>
+
+        <!-- ===== FOOD DETAIL MODAL ===== -->
+        <div class="modal-overlay" id="foodModal">
+            <div class="modal-card">
+                <button class="modal-close" id="modalClose">✕</button>
+                <div class="modal-emoji" id="modalEmoji">🍎</div>
+                <h3 class="modal-food-name" id="modalFoodName">Apple</h3>
+                <p class="modal-serving" id="modalServing">1 medium (182g)</p>
+
+                <div class="modal-nutrition">
+                    <div class="modal-cal">
+                        <span class="modal-cal-value" id="modalCalories">95</span>
+                        <span class="modal-cal-label">kcal</span>
+                    </div>
+                    <div class="modal-macros">
+                        <div class="modal-macro">
+                            <span class="modal-macro-val" id="modalProtein">0.5g</span>
+                            <span class="modal-macro-lbl">Protein</span>
+                        </div>
+                        <div class="modal-macro">
+                            <span class="modal-macro-val" id="modalCarbs">25g</span>
+                            <span class="modal-macro-lbl">Carbs</span>
+                        </div>
+                        <div class="modal-macro">
+                            <span class="modal-macro-val" id="modalFat">0.3g</span>
+                            <span class="modal-macro-lbl">Fat</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-servings">
+                    <label for="servingCount">Servings:</label>
+                    <div class="serving-control">
+                        <button class="serving-btn" id="servingMinus">−</button>
+                        <input type="number" id="servingCount" value="1" min="0.5" step="0.5">
+                        <button class="serving-btn" id="servingPlus">+</button>
+                    </div>
+                </div>
+
+                <div class="modal-meal-type">
+                    <label>Meal:</label>
+                    <div class="meal-pills">
+                        <button class="meal-pill active" data-meal="breakfast">🌅 Breakfast</button>
+                        <button class="meal-pill" data-meal="lunch">☀️ Lunch</button>
+                        <button class="meal-pill" data-meal="dinner">🌙 Dinner</button>
+                        <button class="meal-pill" data-meal="snack">🍿 Snack</button>
+                    </div>
+                </div>
+
+                <button class="btn-add-food" id="addFoodBtn">
+                    <span>Add to Log</span>
+                    <span class="btn-cal" id="btnCalories">+95 kcal</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== GOAL MODAL ===== -->
+        <div class="modal-overlay" id="goalModal">
+            <div class="modal-card goal-modal-card">
+                <button class="modal-close" id="goalModalClose">✕</button>
+                <div class="modal-emoji">🎯</div>
+                <h3 class="modal-food-name">Daily Calorie Goal</h3>
+                <p class="modal-serving">Set your daily target</p>
+                <div class="goal-input-group">
+                    <input type="number" id="goalInput" value="2000" min="500" max="10000" step="50">
+                    <span class="goal-unit">kcal / day</span>
+                </div>
+                <div class="goal-presets">
+                    <button class="goal-preset" data-goal="1200">1200</button>
+                    <button class="goal-preset" data-goal="1500">1500</button>
+                    <button class="goal-preset active" data-goal="2000">2000</button>
+                    <button class="goal-preset" data-goal="2500">2500</button>
+                    <button class="goal-preset" data-goal="3000">3000</button>
+                </div>
+                <button class="btn-add-food" id="saveGoalBtn">
+                    <span>Save Goal</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== TODAY'S LOG ===== -->
+        <section class="log-section" id="logSection">
+            <h2 class="section-title">
+                <span class="section-icon">📋</span> Today's Log
+            </h2>
+
+            <div class="meal-tabs" id="mealTabs">
+                <button class="meal-tab active" data-meal="all">All</button>
+                <button class="meal-tab" data-meal="breakfast">🌅 Breakfast</button>
+                <button class="meal-tab" data-meal="lunch">☀️ Lunch</button>
+                <button class="meal-tab" data-meal="dinner">🌙 Dinner</button>
+                <button class="meal-tab" data-meal="snack">🍿 Snack</button>
+            </div>
+
+            <div class="log-list" id="logList">
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">🥗</div>
+                    <p>No foods logged yet today</p>
+                    <p class="empty-hint">Search for a food above to get started!</p>
+                </div>
+            </div>
+
+            <div class="log-actions" id="logActions" style="display:none;">
+                <button class="btn-ghost btn-danger" id="clearLogBtn">🗑️ Clear Today's Log</button>
+            </div>
+        </section>
+
+        <!-- ===== HISTORY SECTION ===== -->
+        <section class="history-section" id="historySection">
+            <h2 class="section-title">
+                <span class="section-icon">📈</span> Calorie History
+            </h2>
+
+            <div class="history-tabs" id="historyTabs">
+                <button class="history-tab active" data-range="week">This Week</button>
+                <button class="history-tab" data-range="month">This Month</button>
+            </div>
+
+            <div class="chart-container" id="chartContainer">
+                <canvas id="historyChart"></canvas>
+            </div>
+
+            <div class="history-stats" id="historyStats">
+                <div class="history-stat">
+                    <span class="history-stat-value" id="statAvg">0</span>
+                    <span class="history-stat-label">Avg kcal/day</span>
+                </div>
+                <div class="history-stat">
+                    <span class="history-stat-value" id="statBest">0</span>
+                    <span class="history-stat-label">Best Day</span>
+                </div>
+                <div class="history-stat">
+                    <span class="history-stat-value" id="statTotal">0</span>
+                    <span class="history-stat-label">Total kcal</span>
+                </div>
+                <div class="history-stat">
+                    <span class="history-stat-value" id="statDays">0</span>
+                    <span class="history-stat-label">Days Tracked</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ACHIEVEMENTS ===== -->
+        <section class="achievements-section" id="achievementsSection">
+            <h2 class="section-title">
+                <span class="section-icon">🏆</span> Achievements
+            </h2>
+            <div class="streak-banner" id="streakBanner">
+                <div class="streak-flame">🔥</div>
+                <div class="streak-info">
+                    <div class="streak-count" id="streakCount">0</div>
+                    <div class="streak-label">Day Streak</div>
+                </div>
+                <div class="streak-msg" id="streakMsg">Start tracking to build your streak!</div>
+            </div>
+            <div class="badges-grid" id="badgesGrid"></div>
+        </section>
+
+        <!-- ===== LEADERBOARD ===== -->
+        <section class="leaderboard-section" id="leaderboardSection">
+            <h2 class="section-title">
+                <span class="section-icon">🏅</span> Community Leaderboard
+            </h2>
+            <p class="leaderboard-subtitle">Top calorie trackers this week</p>
+            <div class="leaderboard-list" id="leaderboardList"></div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="app-footer">
+        <p>SnapCal — Built with 💚</p>
+    </footer>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✅</span>
+        <span class="toast-msg" id="toastMsg">Added to log!</span>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('✅ Service Worker registered'))
+                    .catch(err => console.log('SW registration failed:', err));
+            });
+        }
+    </script>
+</body>
+
+</html>
