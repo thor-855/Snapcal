@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapCal — Smart Calorie Tracker | Track Every Bite</title>
+    <meta name="description"
+        content="SnapCal helps you track calories effortlessly. Search 100+ foods, monitor macros, and crush your health goals with beautiful visual tracking.">
+    <meta name="theme-color" content="#0a0e17">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/landing.css">
+    <link rel="icon" type="image/png" href="/static/icons/icon-192.png">
+</head>
+
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="landing-nav" id="landingNav">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <span class="nav-logo-icon">🔥</span>
+                <span class="nav-logo-text">Snap<span class="gradient-text">Cal</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="/tracker" class="nav-cta">Open App →</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+        <!-- Animated background orbs -->
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge reveal">
+                <span class="hero-badge-dot"></span>
+                <span>Free & Works Offline</span>
+            </div>
+            <h1 class="hero-title reveal">
+                Track Every Bite.<br>
+                <span class="gradient-text-large">Crush Every Goal.</span>
+            </h1>
+            <p class="hero-subtitle reveal">
+                The smart calorie tracker that makes healthy eating effortless.
+                Search foods, monitor macros, and build winning streaks — all
+                in a beautiful, lightning-fast interface.
+            </p>
+            <div class="hero-actions reveal">
+                <a href="/tracker" class="btn-primary" id="heroCta">
+                    <span>Start Tracking Now</span>
+                    <span class="btn-arrow">→</span>
+                </a>
+                <a href="#features" class="btn-secondary">
+                    Learn More ↓
+                </a>
+            </div>
+
+            <!-- Hero visual: floating food emojis -->
+            <div class="hero-visual reveal">
+                <div class="hero-phone">
+                    <div class="phone-screen">
+                        <div class="phone-header">
+                            <span>🔥</span>
+                            <span class="phone-title">Snap<span style="color: #00f5a0;">Cal</span></span>
+                        </div>
+                        <div class="phone-ring">
+                            <svg viewBox="0 0 120 120">
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.06)"
+                                    stroke-width="8" />
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="url(#miniGrad)" stroke-width="8"
+                                    stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="94"
+                                    transform="rotate(-90 60 60)" />
+                                <defs>
+                                    <linearGradient id="miniGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#00f5a0" />
+                                        <stop offset="100%" style="stop-color:#00d9f5" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="phone-ring-text">
+                                <span class="phone-cal">1,420</span>
+                                <span class="phone-label">kcal</span>
+                            </div>
+                        </div>
+                        <div class="phone-macros">
+                            <div class="phone-macro"><span style="color:#3b82f6;">●</span> 45g P</div>
+                            <div class="phone-macro"><span style="color:#f59e0b;">●</span> 180g C</div>
+                            <div class="phone-macro"><span style="color:#ef4444;">●</span> 38g F</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating food emojis around phone -->
+                <span class="floating-emoji emoji-1">🍎</span>
+                <span class="floating-emoji emoji-2">🥑</span>
+                <span class="floating-emoji emoji-3">🥗</span>
+                <span class="floating-emoji emoji-4">🍗</span>
+                <span class="floating-emoji emoji-5">🥛</span>
+                <span class="floating-emoji emoji-6">🍌</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <section class="features" id="features">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-tag">Why SnapCal?</span>
+                <h2 class="section-heading">Everything You Need to<br><span class="gradient-text-large">Eat
+                        Smarter</span></h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal" style="--delay: 0s">
+                    <div class="feature-icon-wrapper">
+                        <span class="feature-icon">🔍</span>
+                    </div>
+                    <h3>Smart Food Search</h3>
+                    <p>Instantly search through 100+ Indian & international foods with real-time autocomplete. No
+                        scanning, no fuss.</p>
+                </div>
+
+                <div class="feature-card reveal" style="--delay: 0.15s">
+                    <div class="feature-icon-wrapper">
+                        <span class="feature-icon">📊</span>
+                    </div>
+                    <h3>Visual Macro Tracking</h3>
+                    <p>Beautiful progress rings, macro breakdowns, and weekly history charts — all updating in
+                        real-time.</p>
+                </div>
+
+                <div class="feature-card reveal" style="--delay: 0.3s">
+                    <div class="feature-icon-wrapper">
+                        <span class="feature-icon">🏆</span>
+                    </div>
+                    <h3>Streaks & Achievements</h3>
+                    <p>Stay motivated with daily streaks, unlock badges, and compete on the community leaderboard.</p>
+                </div>
+
+                <div class="feature-card reveal" style="--delay: 0.45s">
+                    <div class="feature-icon-wrapper">
+                        <span class="feature-icon">⚡</span>
+                    </div>
+                    <h3>Works Offline</h3>
+                    <p>Full PWA support — install it on your phone and track even without internet. Your data stays on
+                        your device.</p>
+                </div>
+
+                <div class="feature-card reveal" style="--delay: 0.6s">
+                    <div class="feature-icon-wrapper">
+                        <span class="feature-icon">🎯</span>
+                    </div>
+                    <h3>Custom Goals</h3>
+                    <p>Set your daily calorie target from 500 to 10,000 kcal. Presets for popular diet plans included.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal" style="--delay: 0.75s">
+                    <div class="feature-icon-wrapper">
+                        <span class="feature-icon">🌙</span>
+                    </div>
+                    <h3>Meal Categories</h3>
+                    <p>Organize your log by Breakfast, Lunch, Dinner, and Snacks. Filter and review each meal
+                        separately.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-tag">Simple & Fast</span>
+                <h2 class="section-heading">Three Steps to a<br><span class="gradient-text-large">Healthier
+                        You</span></h2>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card reveal" style="--delay: 0s">
+                    <div class="step-number">01</div>
+                    <div class="step-emoji">🔍</div>
+                    <h3>Search</h3>
+                    <p>Find any food in our database — from dal to pizza, we've got it covered.</p>
+                </div>
+
+                <div class="step-connector reveal">
+                    <div class="connector-line"></div>
+                    <div class="connector-dot"></div>
+                </div>
+
+                <div class="step-card reveal" style="--delay: 0.2s">
+                    <div class="step-number">02</div>
+                    <div class="step-emoji">📝</div>
+                    <h3>Log It</h3>
+                    <p>Tap to add, adjust servings, pick your meal type. Takes just 3 seconds.</p>
+                </div>
+
+                <div class="step-connector reveal">
+                    <div class="connector-line"></div>
+                    <div class="connector-dot"></div>
+                </div>
+
+                <div class="step-card reveal" style="--delay: 0.4s">
+                    <div class="step-number">03</div>
+                    <div class="step-emoji">📈</div>
+                    <h3>Track</h3>
+                    <p>Watch your progress ring fill up, check your streak, and smash your goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS SECTION ===== -->
+    <section class="stats-section" id="stats">
+        <div class="section-container">
+            <div class="stats-grid">
+                <div class="stat-item reveal" style="--delay: 0s">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-suffix">+</div>
+                    <div class="stat-label">Foods in Database</div>
+                </div>
+                <div class="stat-item reveal" style="--delay: 0.1s">
+                    <div class="stat-number" data-target="4">0</div>
+                    <div class="stat-suffix"></div>
+                    <div class="stat-label">Macro Categories</div>
+                </div>
+                <div class="stat-item reveal" style="--delay: 0.2s">
+                    <div class="stat-number" data-target="9">0</div>
+                    <div class="stat-suffix"></div>
+                    <div class="stat-label">Food Categories</div>
+                </div>
+                <div class="stat-item reveal" style="--delay: 0.3s">
+                    <div class="stat-number" data-target="8">0</div>
+                    <div class="stat-suffix"></div>
+                    <div class="stat-label">Achievements to Unlock</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section class="final-cta" id="finalCta">
+        <div class="section-container">
+            <div class="cta-card reveal">
+                <div class="cta-orb cta-orb-1"></div>
+                <div class="cta-orb cta-orb-2"></div>
+                <div class="cta-content">
+                    <h2>Ready to Transform Your Nutrition?</h2>
+                    <p>Join thousands who are tracking smarter. It's free, fast, and beautiful.</p>
+                    <a href="/tracker" class="btn-primary btn-large">
+                        <span>🔥 Start Tracking — It's Free</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="landing-footer">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <span>🔥</span>
+                <span>Snap<span class="gradient-text">Cal</span></span>
+            </div>
+            <p class="footer-tagline">Track smarter. Eat better. Feel amazing.</p>
+            <div class="footer-divider"></div>
+            <p class="footer-copy">Built with 💚 — SnapCal © 2026</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/landing.js"></script>
+</body>
+
+</html>
