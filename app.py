@@ -8,9 +8,16 @@ CORS(app)
 
 
 @app.route("/")
-def index():
-    """Serve the main page."""
+def landing():
+    """Serve the landing page."""
+    return render_template("landing.html")
+
+
+@app.route("/tracker")
+def tracker():
+    """Serve the tracker app."""
     return render_template("index.html")
+
 
 
 @app.route("/sw.js")
@@ -52,3 +59,4 @@ if __name__ == "__main__":
     print("\n🔥 Calorie Tracker is running!")
     print("📍 Open http://localhost:5000 in your browser\n")
     app.run(debug=True, port=5000)
+
